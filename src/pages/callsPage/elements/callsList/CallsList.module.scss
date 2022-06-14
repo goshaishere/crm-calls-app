@@ -173,7 +173,7 @@
     right: 2.78%;
     top: 26px;
     bottom: 0%;
-     pointer-events: none;
+    display: inline-block;
   }
 
 
@@ -184,10 +184,31 @@
     :hover {
     background: rgba(212, 223, 243, 0.17);
   }
+  :hover .checkbox{
+    display: block;
+    //pointer-events: none;
+
+  }
+
+  :hover .audioplayer{
+    display: flex;
+    //pointer-events: none;
+  }
+  :hover .nodetime{
+    display: none;
+  }
+  
 }
 
 
+.checkbox {
+  display: none;
+  
+}
 
+.audioplayer {
+  display: none;
+}
 
 
 

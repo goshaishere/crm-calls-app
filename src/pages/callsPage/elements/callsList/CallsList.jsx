@@ -30,7 +30,21 @@ const NodeTime = (props) => {
     c = '0' + c
   }
   let string = b + ':' + c
-  return string
+  return <div className={styles.nodetime}>{string}</div>
+}
+
+const NodeTimeAlter = (props) => {
+  let time = props.time
+  let b = Math.floor(time / 60)
+  let c = time % 60
+  if (b < 10) {
+    b = '0' + b
+  }
+  if (c < 10) {
+    c = '0' + c
+  }
+  let string = b + ':' + c
+  return <div>{string}</div>
 }
 
 const PersonAvatar = (props) => {
@@ -169,6 +183,14 @@ function BpCheckbox(props) {
   );
 }
 
+const AudioPlayer = (props) => {
+  return <div className={styles.audioplayer}>
+    <NodeTimeAlter time={props.time}/>
+    <p>плеер</p>
+    </div>
+
+}
+
 
 
 export const CallsList = (props) => {
@@ -200,14 +222,16 @@ export const CallsList = (props) => {
             calls.map((node, index) => {
               return <div className={styles.box}>
                 <div className={styles.raw}>
-                
+                  <div className={styles.checkbox}> <BpCheckbox/> </div>
                   <div className={styles.in_out}>  <InOut data={node.in_out} time={node.time} />   </div>
                   <div className={styles.date}>  <Time dateTime={node.date} />   </div>
                   <div className={styles.person_avatar}>  <PersonAvatar avatar={node.person_avatar} />  </div>
                   <div className={styles.phone}> <Phone phone={node.partner_data.phone} name={node.partner_data.name} />   </div>
                   <div className={styles.source} ><Source source={node.source} /></div>
                   <div className={styles.rating}></div>
-                  <div className={styles.time}>  <NodeTime time={node.time} />   </div>
+                  
+                  <div className={styles.time}>  <NodeTime time={node.time}/>  <AudioPlayer time={node.time} />    </div>
+                  
                 </div>
               </div>
             }
@@ -226,5 +250,3 @@ export const CallsList = (props) => {
     </div>
   )
 }
-
-//<BpCheckbox />
