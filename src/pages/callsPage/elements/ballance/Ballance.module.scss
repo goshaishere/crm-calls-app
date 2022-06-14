@@ -1,0 +1,20 @@
+.ballance {
+  position: absolute;
+  width: 145px;
+  height: 40px;
+  //left: 1132px;
+  left: 1252px;
+  top: 20px;
+  //border: solid 2px black;
+
+  font-family: "SF Pro Display";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 148%;
+  /* identical to box height, or 21px */
+
+  display: flex;
+  align-items: flex-end;
+  text-align: right;
+}

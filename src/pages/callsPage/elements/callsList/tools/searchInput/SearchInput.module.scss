@@ -1,0 +1,21 @@
+.searchBox {
+    input {
+
+        position: absolute;
+        left: 28px;
+        right: 0%;
+        top: 0%;
+        bottom: 0%;
+
+
+        border: none;
+        background-color: rgba(212, 223, 243, 0);
+        outline:none;
+        color: #5E7793;
+
+
+    }
+    input::placeholder {
+        color: #5E7793
+    }
+}
