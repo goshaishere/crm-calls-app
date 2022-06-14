@@ -35,20 +35,22 @@ export const CallsPage = () => {
     }
 
     const setDate = (days) => {
-        let date = new Date().toISOString()
-        console.log(date)
+        console.log(days, 'days')
+        var unixNow = Date.now();
+        let date = new Date(unixNow).toISOString()
+        console.log(unixNow, date)
         let todayDate = date.slice(0,10)
         console.log(todayDate)
-        let todayDays = todayDate.slice(8, 10)
-        let slice = todayDate.slice(0, 8)
-        let secondDay = parseInt(todayDays, 10) - days
-        let secondDate = slice + secondDay
-        console.log(secondDate)
-
-        set_date_start(secondDate)
+        let daysInSec = days * 86400000
+        console.log(daysInSec)
+        var unixBefore = parseInt(unixNow, 10) - daysInSec
+        console.log(unixBefore)
+        let dateBeforeRaw = new Date(unixBefore).toISOString()
+        console.log(dateBeforeRaw)
+        let dateBefore = dateBeforeRaw.slice(0,10)
+        console.log(dateBefore)
+        set_date_start(dateBefore)
         seDateEnd(todayDate)
-
-
     }
 
     return (

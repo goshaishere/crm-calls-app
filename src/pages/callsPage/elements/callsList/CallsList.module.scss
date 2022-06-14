@@ -140,8 +140,13 @@
     right: 75.35%;
     top: 26px;
     bottom: 0%;
-    width: 150px;
-     pointer-events: none;
+    //width: 150px;
+    pointer-events: none;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .source {

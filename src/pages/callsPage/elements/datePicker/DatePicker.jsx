@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 //import styles from '../../CallsPage.module.scss'
 import styles from './DatePicker.module.scss'
 
@@ -18,6 +18,21 @@ const ColorButton = styled(Button)(({ theme }) => ({
     color: '#005FF8',
   },
 }));
+
+const StyledArrowBackIosIcon = styled(ArrowBackIosIcon)(({ theme }) => ({
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    color: '#005FF8',
+  },
+}));
+
+const StyledArrowForwardIosIcon = styled(ArrowForwardIosIcon)(({ theme }) => ({
+  '&:hover': {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    color: '#005FF8',
+  },
+}));
+
 
 
 const StyledMenu = styled((props) => (
@@ -66,16 +81,19 @@ export const DatePicker = (props) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isOpen, setIsOpen] = useState(false)
 
-  const defaultText = '3 Дня'
+  const [days, setDays] = useState(3)
+
+  const dayText = `${days} Дня`
   const week = 'Неделя'
   const month = 'Месяц'
   const year = 'Год'
   const manualInput = 'Указать даты'
 
 
-  const [buttonText, setButtonText] = useState(defaultText)
+  const [buttonText, setButtonText] = useState(dayText)
 
-
+  useEffect(() => {
+}, [days, buttonText])
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -87,9 +105,9 @@ export const DatePicker = (props) => {
     setIsOpen(!isOpen)
   };
 
-  const defaultClick = (event) => {
-    setButtonText(defaultText)
-    props.setDate(3)
+  const dayClick = (event) => {
+    setButtonText(dayText)
+    props.setDate(days)
     handleClose()
   }
 
@@ -117,17 +135,35 @@ export const DatePicker = (props) => {
   }
 
 
+  const increment = () => {
+    setDays(days + 1)
+    setButtonText(`${days + 1} Дня`)
+
+  }
+
+  const decrement = () => {
+    setDays(days - 1)
+    setButtonText(`${days - 1} Дня`)
+  }
+
 
   return (
     <div className={styles.datepicker}>
+      <StyledArrowBackIosIcon   onClick={decrement}      sx={{
+          color: '#5E7793', fontFamily: 'SF Pro Display',
+          fontStyle: 'normal',
+          fontWeight: '400',
+          fontSize: '14px',
+          lineHeight: '148%',
+          textTransform: 'none',
+
+        }} />
       <ColorButton
         id="demo-customized-button"
         aria-haspopup="true"
         variant="text"
         disableElevation
         onClick={handleClick}
-        startIcon={<ArrowBackIosIcon />}
-        endIcon={<ArrowForwardIosIcon />}
         sx={{
           color: '#5E7793', fontFamily: 'SF Pro Display',
           fontStyle: 'normal',
@@ -140,6 +176,15 @@ export const DatePicker = (props) => {
       >
         {buttonText}
       </ColorButton>
+      <StyledArrowForwardIosIcon  onClick={increment}       sx={{
+          color: '#5E7793', fontFamily: 'SF Pro Display',
+          fontStyle: 'normal',
+          fontWeight: '400',
+          fontSize: '14px',
+          lineHeight: '148%',
+          textTransform: 'none',
+
+        }}/>
       <StyledMenu
 
         id="demo-customized-menu"
@@ -150,7 +195,7 @@ export const DatePicker = (props) => {
         open={isOpen}
         onClose={handleClose}
       >
-        <MenuItem onClick={defaultClick} disableRipple>{defaultText}</MenuItem>
+        <MenuItem onClick={dayClick} disableRipple>{dayText}</MenuItem>
         <MenuItem onClick={weekClick} disableRipple>{week}</MenuItem>
         <MenuItem onClick={monthClick} disableRipple>{month}</MenuItem>
         <MenuItem onClick={yearClick} disableRipple>{year}</MenuItem>
